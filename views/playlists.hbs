@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Playlists</title>
+</head>
+<body>
+  <h1>All Playlists</h1>
+
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>User ID</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each playlists}}
+      <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.userID}}</td>
+        <td>{{this.createdAt}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add New User</title>
+</head>
+<body>
+  <h1>Add a New User</h1>
+
+  <form action="/users/add" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="passwordHash">Password Hash:</label>
+    <input type="text" id="passwordHash" name="passwordHash" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p><a href="/">Back to Home</a></p>
+</body>
+</html>

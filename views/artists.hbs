@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Artists</title>
+</head>
+<body>
+  <h1>All Artists</h1>
+
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Debut Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each artists}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.country}}</td>
+        <td>{{this.debutYear}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>

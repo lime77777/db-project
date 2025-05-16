@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Songs</title>
+</head>
+<body>
+  <h1>All Songs</h1>
+
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Release Date</th>
+        <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each songs}}
+      <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.duration}}</td>
+        <td>{{this.releaseDate}}</td>
+        <td>{{this.genre}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
