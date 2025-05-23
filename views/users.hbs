@@ -7,12 +7,25 @@
 <body>
   <h1>All Users</h1>
 
+  <h2>Add New User</h2>
+  <form action="/users/add" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Add User</button>
+  </form>
+
+  <h2>Existing Users</h2>
   <table border="1" cellpadding="5">
     <thead>
       <tr>
         <th>Username</th>
         <th>Email</th>
         <th>Created At</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +34,11 @@
         <td>{{this.username}}</td>
         <td>{{this.email}}</td>
         <td>{{this.createdAt}}</td>
+        <td>
+          <form action="/users/delete/{{this.userID}}" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+          </form>
+        </td>
       </tr>
       {{/each}}
     </tbody>

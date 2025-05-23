@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artist-Song Relationships</title>
+</head>
+<body>
+  <h1>ArtistSong Table</h1>
+
+  <h2>Add Artist-Song Pair</h2>
+  <form action="/artistsong/add" method="POST">
+    <label for="artistID">Artist:</label>
+    <select name="artistID" required>
+      {{#each artists}}
+        <option value="{{this.artistID}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="songID">Song:</label>
+    <select name="songID" required>
+      {{#each songs}}
+        <option value="{{this.songID}}">{{this.title}}</option>
+      {{/each}}
+    </select>
+
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Current Artist-Song Links</h2>
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Artist Name</th>
+        <th>Song Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each artistsongs}}
+      <tr>
+        <td>{{this.artistName}}</td>
+        <td>{{this.songTitle}}</td>
+        <td>
+          <form action="/artistsong/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="artistID" value="{{this.artistID}}">
+            <input type="hidden" name="songID" value="{{this.songID}}">
+            <button type="submit" onclick="return confirm('Delete this artist-song link?');">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>

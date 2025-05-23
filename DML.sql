@@ -1,37 +1,63 @@
--- Data manipulation queries for a music streaming application
+-- Data manipulation queries for Music Playlist Manager
 -- Group 69: Alex Stephen and Liam Gold
 
--- scripts to populate various dropdown menus will be added here when neccessary
-
--- SELECT statements for listing each table's data
+-- SELECT queries for each table
 SELECT * FROM Artists;
 SELECT * FROM Songs;
 SELECT * FROM Users;
 SELECT * FROM Playlists;
 
--- Query for all insert and delete functionality with colon : character being used to 
--- denote the variables that will have data from the backend programming language
+-- SELECT with JOINs for junction tables
+SELECT asg.artistID, a.name AS artistName, asg.songID, s.title AS songTitle
+FROM ArtistSong asg
+JOIN Artists a ON asg.artistID = a.artistID
+JOIN Songs s ON asg.songID = s.songID;
 
--- insert statements for adding records to each table
-INSERT INTO Artists (artistID, name, country, debutYear)
-VALUES (:artistIDInput, :nameInput, :countryInput, :debutYearInput);
+SELECT ps.playlistID, p.title AS playlistTitle, ps.songID, s.title AS songTitle
+FROM PlaylistSong ps
+JOIN Playlists p ON ps.playlistID = p.playlistID
+JOIN Songs s ON ps.songID = s.songID;
 
-INSERT INTO Songs (songID, title, duration, releaseDate, genre0)
-VALUES (:songIDInput, :titleInput, :durationInput, :releaseDateInput, :genreInput);
+SELECT us.userID, u.username AS userName, us.songID, s.title AS songTitle
+FROM UserSong us
+JOIN Users u ON us.userID = u.userID
+JOIN Songs s ON us.songID = s.songID;
 
-INSERT INTO Users (userID, username, email, passwordHash, createdAt)
-VALUES (:userIDInput, :usernameInput, :emailInput, :passwordHashInput, :createdAtInput);
+-- INSERT queries
+INSERT INTO Artists (name, country, debutYear)
+VALUES (:nameInput, :countryInput, :debutYearInput);
 
-INSERT INTO Playlists (playlistID, title, description, userID, createdAt)
-VALUES (:playlistIDInput, :titleInput, :descriptionInput, :userIDInput, :createdAtInput);
+INSERT INTO Songs (title, duration, releaseDate, genre0)
+VALUES (:titleInput, :durationInput, :releaseDateInput, :genreInput);
 
--- DELETE statements for removing records from each table
+INSERT INTO Users (username, email, passwordHash, createdAt)
+VALUES (:usernameInput, :emailInput, :passwordHashInput, :createdAtInput);
+
+INSERT INTO Playlists (title, description, userID, createdAt)
+VALUES (:titleInput, :descriptionInput, :userIDInput, :createdAtInput);
+
+-- INSERT into junction tables
+INSERT INTO ArtistSong (artistID, songID)
+VALUES (:artistIDInput, :songIDInput);
+
+INSERT INTO PlaylistSong (playlistID, songID)
+VALUES (:playlistIDInput, :songIDInput);
+
+INSERT INTO UserSong (userID, songID)
+VALUES (:userIDInput, :songIDInput);
+
+-- DELETE queries
 DELETE FROM Artists WHERE artistID = :artistIDInput;
 DELETE FROM Songs WHERE songID = :songIDInput;
 DELETE FROM Users WHERE userID = :userIDInput;
 DELETE FROM Playlists WHERE playlistID = :playlistIDInput;
 
--- UPDATE statements for modifying records in each table
+-- DELETE from junction tables
+DELETE FROM ArtistSong WHERE artistID = :artistIDInput AND songID = :songIDInput;
+DELETE FROM PlaylistSong WHERE playlistID = :playlistIDInput AND songID = :songIDInput;
+DELETE FROM UserSong WHERE userID = :userIDInput AND songID = :songIDInput;
+
+-- UPDATE queries
 UPDATE Artists
 SET name = :nameInput,
     country = :countryInput,

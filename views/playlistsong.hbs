@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playlist-Song Links</title>
+</head>
+<body>
+  <h1>PlaylistSong Table</h1>
+
+  <h2>Add Playlist-Song Pair</h2>
+  <form action="/playlistsong/add" method="POST">
+    <label for="playlistID">Playlist:</label>
+    <select name="playlistID" required>
+      {{#each playlists}}
+        <option value="{{this.playlistID}}">{{this.title}}</option>
+      {{/each}}
+    </select>
+
+    <label for="songID">Song:</label>
+    <select name="songID" required>
+      {{#each songs}}
+        <option value="{{this.songID}}">{{this.title}}</option>
+      {{/each}}
+    </select>
+
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Current Playlist-Song Links</h2>
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Playlist</th>
+        <th>Song</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each playlistsongs}}
+      <tr>
+        <td>{{this.playlistTitle}}</td>
+        <td>{{this.songTitle}}</td>
+        <td>
+          <form action="/playlistsong/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="playlistID" value="{{this.playlistID}}">
+            <input type="hidden" name="songID" value="{{this.songID}}">
+            <button type="submit" onclick="return confirm('Remove this song from playlist?');">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
