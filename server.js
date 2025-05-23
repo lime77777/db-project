@@ -122,7 +122,7 @@ app.post('/playlists/delete', (req, res) => {
 });
 
 // PLAYLISTSONG ROUTES
-app.get('/playlistsongs', (req, res) => {
+app.get('/playlistsong', (req, res) => {
   db.query(`
     SELECT ps.playlistID, ps.songID, p.title AS playlistTitle, s.title AS songTitle
     FROM PlaylistSong ps
@@ -130,26 +130,26 @@ app.get('/playlistsongs', (req, res) => {
     JOIN Songs s ON ps.songID = s.songID
   `, (err, results) => {
     if (err) return res.status(500).send("Database error");
-    res.render('playlistsongs', { playlistsongs: results });
+    res.render('playlistsong', { playlistsong: results });
   });
 });
 
-app.post('/playlistsongs/add', (req, res) => {
+app.post('/playlistsong/add', (req, res) => {
   const { playlistID, songID } = req.body;
   db.query('INSERT INTO PlaylistSong (playlistID, songID) VALUES (?, ?)', [playlistID, songID], (err) => {
     if (err) return res.status(500).send("Insert failed");
-    res.redirect('/playlistsongs');
+    res.redirect('/playlistsong');
   });
 });
 
-app.post('/playlistsongs/delete', (req, res) => {
+app.post('/playlistsong/delete', (req, res) => {
   const { playlistID, songID } = req.body;
   db.query('DELETE FROM PlaylistSong WHERE playlistID = ? AND songID = ?', [playlistID, songID], (err) => {
     if (err) return res.status(500).send("Delete failed");
-    res.redirect('/playlistsongs');
+    res.redirect('/playlistsong');
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://classwork.engr.oregonstate.edu:${PORT}`);
 });
